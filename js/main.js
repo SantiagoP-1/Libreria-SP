@@ -1,50 +1,107 @@
-const libros = [
-    { titulo: "El Principito", autor: "Antoine de Saint-Exupéry" },
-    { titulo: "Orgullo y Prejuicio", autor: "Jane Austen" },
-    { titulo: "Alicia en el Pais de las Maravillas", autor: "Lewis Carroll" },
-    { titulo: "Mujercitas", autor: "Louisa May Alcott" },
-];
+let libros = JSON.parse(localStorage.getItem("libros")) || [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-function mostrarLibros(lista) {
-  console.log("Lista de libros disponibles:");
-  lista.forEach((libro, index) => {
-    console.log(`${index + 1}. "${libro.titulo}" de ${libro.autor}`);
-  });
+function renderLibros(lista) {
+    const productsContainer = document.getElementById("products-container");
+    productsContainer.innerHTML = "";
+
+    if (lista.length === 0) {
+        productsContainer.innerHTML = "<p>No hay libros para mostrar.</p>";
+        return;
+    }
+
+    lista.forEach((libro, index) => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+        div.innerHTML = `
+            <span><strong>${libro.titulo}</strong> de ${libro.autor}</span>
+            <button class="btnAgregarCarrito" data-index="${index}">Agregar al carrito</button>
+        `;
+        productsContainer.appendChild(div);
+    });
+
+    agregarAlCarrito();
+}
+function agregarAlCarrito() {
+    const botonesAgregar = document.querySelectorAll(".btnAgregarCarrito");
+    botonesAgregar.forEach(button => {
+        button.addEventListener("click", () => {
+            const index = button.getAttribute("data-index");
+            const libro = libros[index];
+            carrito.push(libro);
+            guardarCarrito();
+            mostrarCarrito(carrito);
+        });
+    });
 }
 
-function agregarLibro(titulo, autor) {
-  libros.push({ titulo, autor });
-  alert(`El libro "${titulo}" fue agregado a la biblioteca.`);
+function guardarLibros() {
+    localStorage.setItem("libros", JSON.stringify(libros));
+}
+document.getElementById("btnAgregar").addEventListener("click", () => {
+    const titulo = document.getElementById("titulo").value.trim();
+    const autor = document.getElementById("autor").value.trim();
+
+    if (titulo === "" || autor === "") {
+        mostrarMensaje("Por favor, completa todo.");
+        return;
+    }
+
+    libros.push({ titulo, autor });
+    guardarLibros();
+    renderLibros(libros);
+    document.getElementById("titulo").value = "";
+    document.getElementById("autor").value = "";
+});
+
+document.getElementById("btnBuscar").addEventListener("click", () => { 
+    const texto = document.getElementById("buscador").value.trim().toLowerCase();
+    if (texto === "") {
+        renderLibros(libros);
+        return;
+    }
+    const filtrados = libros.filter(libro => libro.titulo.toLowerCase().includes(texto));
+    renderLibros(filtrados);
+});
+
+document.getElementById("btnMostrarTodos").addEventListener("click", () => {
+    renderLibros(libros);
+});
+
+function mostrarMensaje(mensaje) {
+    const productsContainer = document.getElementById("products-container");
+    productsContainer.innerHTML = `<p>${mensaje}</p>`;
 }
 
-function buscarLibro(tituloBuscado) {
-  const encontrado = libros.find(libro => libro.titulo.toLowerCase() === tituloBuscado.toLowerCase());
-  if (encontrado) {
-    alert(`Libro encontrado: "${encontrado.titulo}" de ${encontrado.autor}`);
-  } else {
-    alert("Libro no encontrado.");
-  }
+function mostrarCarrito(lista) {
+    const carritoContainer = document.getElementById("carrito-container");
+    carritoContainer.innerHTML = "";
+
+    if (lista.length === 0) {
+        carritoContainer.innerHTML = "<p>El carrito está vacío.</p>";
+        return;
+    }
+
+    lista.forEach((libro, index) => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+        div.innerHTML = `
+            <span><strong>${libro.titulo}</strong> de ${libro.autor}</span>
+            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+        `;
+        carritoContainer.appendChild(div);
+    });
 }
 
-let opcion;
-
-while (opcion !== "4") {
-  opcion = prompt(
-    "Bienvenido a la Librería SP \nElige una opción:\n1. Ver libros\n2. Agregar libro\n3. Buscar libro\n4. Salir"
-  );
-
-  if (opcion === "1") {
-    mostrarLibros(libros);
-  } else if (opcion === "2") {
-    const nuevoTitulo = prompt("Ingrese el título del nuevo libro:");
-    const nuevoAutor = prompt("Ingrese el autor del nuevo libro:");
-    agregarLibro(nuevoTitulo, nuevoAutor);
-  } else if (opcion === "3") {
-    const tituloBuscar = prompt("Ingrese el título del libro:");
-    buscarLibro(tituloBuscar);
-  } else if (opcion === "4") {
-    alert("Gracias por visitar la Librería SP. ¡Saludos!");
-  } else {
-    alert("Opción inválida. Intente nuevamente.");
-  }
+function guardarCarrito() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
+
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    guardarCarrito();
+    mostrarCarrito(carrito);
+}
+
+renderLibros(libros);
+mostrarCarrito(carrito);

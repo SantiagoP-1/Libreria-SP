@@ -3,12 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
     <!-- JS -->
     <script defer src="./js/main.js"></script>
-    <title>Santiago Perez</title>
+    <title>Libreria SP</title>
 </head>
 <body>
-    <h1>Proyecto de Java - Entrega N1</h1>
-    <p>"La idea es que sea un buscador de libros / una libreria.</p>
+    <h1>Libreria MDQ</h1>
+
+    <section id="formulario">
+        <h2>Agregar nuevo libro</h2>
+            <input type="text" id="titulo" placeholder="Título">
+            <input type="text" id="autor" placeholder="Autor">
+            <button id="btnAgregar">Agregar libro</button>
+    </section>
+    <section id="busqueda">
+        <h2>Buscar libro por título</h2>
+            <input type="text" id="buscador" placeholder="Buscar..">
+            <button id="btnBuscar">Buscar</button>
+            <button id="btnMostrarTodos">Mostrar todos</button>
+    </section>
+    <section id="products-container">
+        <!-- Los productos se agregarian aca -->
+    </section>
+    <h2><a href="./pages/carrito.html">Ir al Carrito</a></h2>
 </body>
 </html>
