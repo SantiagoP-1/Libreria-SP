@@ -1,40 +1,65 @@
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+let accionCarrito = JSON.parse(localStorage.getItem("accionCarrito")) || [];
 
-function mostrarCarrito(lista) {
-    const carritoContainer = document.getElementById("carrito-container");
-    carritoContainer.innerHTML = "";
+function renderCartShopping() {
+  const shoppingCartBody = document.getElementById("shopping-cart-body");
+  const totalPrice = document.getElementById("total-price");
+  const checkoutButton = document.getElementById("checkout-btn");
 
-    if (lista.length === 0) {
-        carritoContainer.innerHTML = "<p>El carrito está vacío.</p>";
-        return;
-    }
+  if (!accionCarrito.length) {
+    document.getElementById("empty-cart-message").style.display = "block";
+    shoppingCartBody.innerHTML = "";
+    totalPrice.textContent = "0.00";
+    checkoutButton.disabled = true;
+    return;
+  } else {
+    document.getElementById("empty-cart-message").style.display = "none";
+    checkoutButton.disabled = false;
+  }
 
-    lista.forEach((libro, index) => {
-        const div = document.createElement("div");
-        div.classList.add("card");
-        div.innerHTML = `
-            <span><strong>${libro.titulo}</strong> de ${libro.autor}</span>
-            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
-        `;
-        carritoContainer.appendChild(div);
-    });
+  let total = 0;
+  shoppingCartBody.innerHTML = "";
+
+  accionCarrito.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>
+        <img src="${item.image}" alt="${item.title}" class="img-fluid" style="max-width: 60px; height: auto;">
+      </td>
+      <td>${item.title}</td>
+      <td>${item.author ? item.author : "No especificado"}</td>
+      <td>$${item.price.toFixed(2)}</td>
+      <td>
+        <input type="number" class="form-control text-center quantity-input" id="${item.id}" value="${item.quantity}" min="1" style="width: 80px; margin: auto;">
+      </td>
+    `;
+
+    shoppingCartBody.appendChild(row);
+    addQuantityEvent(row);
+  });
+
+  totalPrice.textContent = total.toFixed(2);
 }
 
-function guardarCarrito() {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+function addQuantityEvent(row) {
+  const input = row.querySelector(".quantity-input");
+
+  input.onchange = (e) => {
+    const id = parseInt(e.target.id);
+    let newQty = parseInt(e.target.value);
+    if (isNaN(newQty) || newQty < 1) newQty = 1;
+
+    const index = accionCarrito.findIndex((item) => item.id === id);
+    accionCarrito[index].quantity = newQty;
+    updateCartShopping();
+  };
 }
 
-function agregarAlCarrito(index) {
-    const libro = libro[index];
-    carrito.push(libro);
-    guardarCarrito();
-    mostrarCarrito(carrito);
+function updateCartShopping() {
+  localStorage.setItem("accionCarrito", JSON.stringify(accionCarrito));
+  renderCartShopping();
 }
 
-function eliminarDelCarrito(index) {
-    carrito.splice(index, 1);
-    guardarCarrito();
-    mostrarCarrito(carrito);
-}
-
-mostrarCarrito(carrito);
+renderCartShopping();

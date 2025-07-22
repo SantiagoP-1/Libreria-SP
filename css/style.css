@@ -1,46 +1,171 @@
-/* Estilo general */
+/* Reset general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Colores personalizados */
+:root {
+  --brown: #5e4630;
+  --brown-light: #7a5c3f;
+  --pastel-bg: #f3e8d9;
+  --text-dark: #2e2e2e;
+}
+
+/* Body */
+body {
+  font-family: 'Georgia', serif;
+  background-color: var(--pastel-bg);
+  color: var(--text-dark);
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--brown);
+}
+
+.navbar-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.nav-item {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background-color: var(--brown-light);
+}
+
+.nav-item:active {
+  background-color: #8d6e5a;
+  color: white;
+  scale: 0.95;
+}
+
+/* Hero section */
+.hero {
+  background: linear-gradient(135deg, #8d6e5a, #5e4630);
+  color: #fff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+
+/* Card de libros */
+.card {
+  background-color: white;
+  border: 1px solid #d3c4b3;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  margin-bottom: 30px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card-img {
+  width: 60%;
+  height: auto;
+  border-radius: 6px;
+  align-self: center;
+  transition: all 0.3s ease;
+}
+
+.card-img:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  text-align: center;
+  color: var(--brown);
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+.card-text {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* Botón de agregar */
+.card-add-btn {
+  margin-top: 10px;
+  background-color: var(--brown);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.card-add-btn:hover {
+  background-color: var(--brown-light);
+}
+
+/* Footer */
+footer {
+  background-color: var(--brown);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+/* Colores */
+:root {
+  --brown: #5e4630;
+  --light-pastel: #f3e8d9;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
-    color: #333;
+  background-color: var(--light-pastel);
+  font-family: 'Georgia', serif;
+  color: #2e2e2e;
 }
 
-h1, h2 {
-    color: #2c3e50;
+.bg-brown {
+  background-color: var(--brown) !important;
 }
 
-/* Inputs y Botones */
-
-input[type="text"] {
-    padding: 8px;
-    margin-right: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.navbar-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
-button {
-    padding: 8px 12px;
-    border: none;
-    background-color: #3498db;
-    color: #ffffff;
-    border-radius: 3px;
-    cursor: pointer;
+.table-brown {
+  background-color: var(--brown);
 }
 
-button:hover {
-    background-color: #2980b9;
+.table th,
+.table td {
+  vertical-align: middle;
 }
 
-/* Enlace al carrito */
-
-a {
-    text-decoration: none;
-    color: #3498db;
+#checkout-btn {
+  background-color: var(--brown);
+  border: none;
 }
 
-a:hover {
-    text-decoration: underline;
+#checkout-btn:hover {
+  background-color: #7a5c3f;
 }

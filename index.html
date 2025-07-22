@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS -->
-    <link rel="stylesheet" href="./css/style.css">
-    <!-- JS -->
-    <script defer src="./js/main.js"></script>
-    <title>Libreria SP</title>
-</head>
-<body>
-    <h1>Libreria MDQ</h1>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Librería Mágica MDP | Inicio</title>
 
-    <section id="formulario">
-        <h2>Agregar nuevo libro</h2>
-            <input type="text" id="titulo" placeholder="Título">
-            <input type="text" id="autor" placeholder="Autor">
-            <button id="btnAgregar">Agregar libro</button>
-    </section>
-    <section id="busqueda">
-        <h2>Buscar libro por título</h2>
-            <input type="text" id="buscador" placeholder="Buscar..">
-            <button id="btnBuscar">Buscar</button>
-            <button id="btnMostrarTodos">Mostrar todos</button>
-    </section>
-    <section id="products-container">
-        <!-- Los productos se agregarian aca -->
-    </section>
-    <h2><a href="./pages/carrito.html">Ir al Carrito</a></h2>
+  <!-- Favicon -->
+  <link rel="icon" href="./images/logolibreria.png" type="image/x-icon" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- JavaScript -->
+  <script defer src="./js/main.js"></script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="./images/logolibreria.png" alt="LogoLibrería" class="navbar-logo" />
+          Librería MDP
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="./pages/carrito.html">Carrito</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Bienvenido a la Librería Mágica MDP</h1>
+      <p class="lead">Explorá la colección completa de libros del Mundo de Harry Potter</p>
+    </div>
+  </section>
+
+  <!-- Catálogo de Libros -->
+  <main class="container py-5">
+    <h2 class="text-center mb-4">📚 Libros Disponibles</h2>
+    <div class="row" id="books-container">
+      <!-- Acá van los libros desde JavaScript -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 text-center">
+        <div class="container text-center">
+      <a href="https://www.wizardingworld.com/" target="_blank">
+        <img src="./images/logolibreria.png" alt="LogoLibreria" width="80" class="mb-3 rounded-circle">
+      </a>
+      <h5>Hogwarts Colegio de Magia y Hechicería</h5>
+      <p>“La felicidad se puede hallar hasta en los más oscuros momentos, si somos capaces de usar bien la luz.”</p>
+      <p class="mb-0 mt-3">© 2025 Libreria Mágica. Todos los derechos son reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
