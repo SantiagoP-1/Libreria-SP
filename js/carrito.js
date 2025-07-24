@@ -108,117 +108,115 @@ document.addEventListener("DOMContentLoaded", () => {
   if (shoppingCartBody) {
     renderCartShopping();
   }
-
+})
   const checkoutButton = document.getElementById("checkout-btn");
-  if (checkoutButton) {
-    // 👇 Aca pegás TODO el bloque de Swal.fire
-    checkoutButton.addEventListener("click", () => {
-      const totalLibros = accionCarrito.reduce((sum, item) => sum + item.quantity, 0);
-      const totalPrecio = accionCarrito.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
-      const titulos = accionCarrito.map(item => item.title).join(', ');
+  if (checkoutButton){
+checkoutButton.addEventListener("click", () => {
+  const totalLibros = accionCarrito.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrecio = accionCarrito.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
+  const titulos = accionCarrito.map(item => item.title).join(', ');
+  const datosGuardados = JSON.parse(localStorage.getItem("datosUsuario")) || {};
 
-      Swal.fire({
-        title: 'Confirmar Compra',
-        html: `
-          <div class="text-start">
-            <p><strong>Resumen de tu compra:</strong></p>
-            <ul style="margin-left: 1em; padding-left: 0.5em;">
-              <li>📘 <strong>Total de libros:</strong> ${totalLibros}</li>
-              <li>💰 <strong>Precio total:</strong> $${totalPrecio}</li>
-              <li>🛍️ <strong>Títulos:</strong> ${titulos}</li>
-            </ul>
-            <hr class="my-2">
-            <p><strong>Completá tus datos para finalizar la compra:</strong></p>
-            <div class="form-group mt-2">
-              <label for="nombreInput">Nombre Completo:</label>
-              <input type="text" id="nombreInput" class="swal2-input" placeholder="Tu nombre">
-            </div>
-            <div class="form-group mt-2">
-              <label for="emailInput">Email:</label>
-              <input type="email" id="emailInput" class="swal2-input" placeholder="tu@email.com">
-            </div>
-            <div class="form-group mt-2">
-              <label for="direccionInput">Dirección:</label>
-              <input type="text" id="direccionInput" class="swal2-input" placeholder="Calle y número">
-            </div>
-            <div class="form-group mt-2">
-              <label for="tarjetaInput">Número de Tarjeta:</label>
-              <input type="text" id="tarjetaInput" class="swal2-input" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
-            </div>
-          </div>
-        `,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, Comprar',
-        cancelButtonText: 'Cancelar',
+  Swal.fire({
+    title: 'Confirmar Compra',
+    html: `
+      <div class="text-start">
+        <p><strong>Resumen de tu compra:</strong></p>
+        <ul style="margin-left: 1em; padding-left: 0.5em;">
+          <li>📘 <strong>Total de libros:</strong> ${totalLibros}</li>
+          <li>💰 <strong>Precio total:</strong> $${totalPrecio}</li>
+          <li>🛍️ <strong>Títulos:</strong> ${titulos}</li>
+        </ul>
+        <hr class="my-2">
+        <p><strong>Completá tus datos para finalizar la compra:</strong></p>
+        <input type="text" id="nombreInput" class="swal2-input" placeholder="Tu nombre">
+        <input type="email" id="emailInput" class="swal2-input" placeholder="tu@email.com">
+        <input type="text" id="direccionInput" class="swal2-input" placeholder="Calle y número">
+        <input type="text" id="tarjetaInput" class="swal2-input" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+      </div>
+    `,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, Comprar',
+    cancelButtonText: 'Cancelar',
 
-        didOpen: () => {
-          const tarjetaInput = Swal.getPopup().querySelector('#tarjetaInput');
-          tarjetaInput.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            value = value.substring(0, 16);
-            let formatted = '';
-            for (let i = 0; i < value.length; i += 4) {
-              formatted += value.substring(i, i + 4) + ' ';
-            }
-            e.target.value = formatted.trim();
-          });
-        },
+    didOpen: () => {
+      const popup = Swal.getPopup();
+      popup.querySelector('#nombreInput').value = datosGuardados.nombre || '';
+      popup.querySelector('#emailInput').value = datosGuardados.email || '';
+      popup.querySelector('#direccionInput').value = datosGuardados.direccion || '';
+      popup.querySelector('#tarjetaInput').value = datosGuardados.tarjeta || '';
 
-        preConfirm: () => {
-          const nombre = Swal.getPopup().querySelector('#nombreInput').value.trim();
-          const email = Swal.getPopup().querySelector('#emailInput').value.trim();
-          const direccion = Swal.getPopup().querySelector('#direccionInput').value.trim();
-          const tarjeta = Swal.getPopup().querySelector('#tarjetaInput').value.trim();
-
-          if (!nombre || !email || !direccion || !tarjeta) {
-            Swal.showValidationMessage('⚠️ Por favor, completa todos los campos.');
-            return false;
-          }
-
-          const regexNombre = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-          if (!regexNombre.test(nombre)) {
-            Swal.showValidationMessage('⚠️ El nombre solo debe contener letras y espacios.');
-            return false;
-          }
-
-          const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!regexEmail.test(email)) {
-            Swal.showValidationMessage('⚠️ Ingresá un email válido.');
-            return false;
-          }
-
-          const regexDireccion = /^[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ\s]+$/;
-          if (!regexDireccion.test(direccion)) {
-            Swal.showValidationMessage('⚠️ La dirección solo puede contener letras, números y espacios.');
-            return false;
-          }
-
-          const cleanTarjeta = tarjeta.replace(/\s+/g, '');
-          if (!/^\d{16}$/.test(cleanTarjeta)) {
-            Swal.showValidationMessage('⚠️ El número de tarjeta debe tener 16 dígitos numéricos.');
-            return false;
-          }
-
-          return { nombre, email, direccion, tarjeta };
+      const tarjetaInput = popup.querySelector('#tarjetaInput');
+      tarjetaInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '').substring(0, 16);
+        let formatted = '';
+        for (let i = 0; i < value.length; i += 4) {
+          formatted += value.substring(i, i + 4) + ' ';
         }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          accionCarrito = [];
-          localStorage.removeItem("accionCarrito");
-          renderCartShopping();
-          Swal.fire(
-            '¡Compra Realizada!',
-            'Tu compra se ha procesado con éxito. ¡Gracias!',
-            'success'
-          ).then(() => {
-            window.location.href = "../index.html";
-          });
-        }
+        e.target.value = formatted.trim();
       });
-    });
-  }
+    },
+
+    preConfirm: () => {
+      const popup = Swal.getPopup();
+      const nombre = popup.querySelector('#nombreInput').value.trim();
+      const email = popup.querySelector('#emailInput').value.trim();
+      const direccion = popup.querySelector('#direccionInput').value.trim();
+      const tarjeta = popup.querySelector('#tarjetaInput').value.trim();
+
+      if (!nombre || !email || !direccion || !tarjeta) {
+        Swal.showValidationMessage('⚠️ Por favor, completa todos los campos.');
+        return false;
+      }
+
+      const regexNombre = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+      if (!regexNombre.test(nombre)) {
+        Swal.showValidationMessage('⚠️ El nombre solo debe contener letras y espacios.');
+        return false;
+      }
+
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regexEmail.test(email)) {
+        Swal.showValidationMessage('⚠️ Ingresá un email válido.');
+        return false;
+      }
+
+      const regexDireccion = /^[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ\s]+$/;
+      if (!regexDireccion.test(direccion)) {
+        Swal.showValidationMessage('⚠️ La dirección solo puede contener letras, números y espacios.');
+        return false;
+      }
+
+      const cleanTarjeta = tarjeta.replace(/\s+/g, '');
+      if (!/^\d{16}$/.test(cleanTarjeta)) {
+        Swal.showValidationMessage('⚠️ El número de tarjeta debe tener 16 dígitos numéricos.');
+        return false;
+      }
+
+      return { nombre, email, direccion, tarjeta };
+    }
+
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const { nombre, email, direccion, tarjeta } = result.value;
+
+      localStorage.setItem("datosUsuario", JSON.stringify({ nombre, email, direccion, tarjeta }));
+      accionCarrito = [];
+      localStorage.removeItem("accionCarrito");
+      renderCartShopping();
+
+      Swal.fire(
+        '¡Compra Realizada!',
+        'Tu compra se ha procesado con éxito. ¡Gracias!',
+        'success'
+      ).then(() => {
+        window.location.href = "../index.html";
+      });
+    }
+  });
 });
+};
 
