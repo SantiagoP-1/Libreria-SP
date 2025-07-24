@@ -93,7 +93,7 @@ function addBookToShoppingCart(book, quantity) {
 document.addEventListener("DOMContentLoaded", async () => {
   if (booksContainer) {
     try {
-      const response = await fetch("../db/libros.json");
+      const response = await fetch("./db/libros.json");
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
