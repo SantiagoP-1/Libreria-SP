@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Librería Mágica MDP | Inicio</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="./images/logolibreria.png" type="image/x-icon" />
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+  <!-- Logo -->
+  <link rel="icon" type="image/png" href="./images/logolibreria.png">
+  <!-- Bootstrap  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Toastify -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="./css/style.css" />
-
-  <!-- JavaScript -->
-  <script defer src="./js/main.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body>
   <!-- Navbar -->
   <header>
@@ -33,13 +29,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="./pages/carrito.html">Carrito</a></li>
+            <li class="nav-item"><a class="nav-link" href="./pages/carrito.html">Carrito 🛒 <span id="cart-count"></span></a></li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
-
   <!-- Hero -->
   <section class="hero bg-primary text-white text-center py-5">
     <div class="container">
@@ -47,18 +42,16 @@
       <p class="lead">Explorá la colección completa de libros del Mundo de Harry Potter</p>
     </div>
   </section>
-
   <!-- Catálogo de Libros -->
   <main class="container py-5">
     <h2 class="text-center mb-4">📚 Libros Disponibles</h2>
     <div class="row" id="books-container">
-      <!-- Acá van los libros desde JavaScript -->
+      <!-- Libros DB -->
     </div>
   </main>
-
   <!-- Footer -->
   <footer class="bg-dark text-light py-4 text-center">
-        <div class="container text-center">
+    <div class="container text-center">
       <a href="https://www.wizardingworld.com/" target="_blank">
         <img src="./images/logolibreria.png" alt="LogoLibreria" width="80" class="mb-3 rounded-circle">
       </a>
@@ -67,8 +60,9 @@
       <p class="mb-0 mt-3">© 2025 Libreria Mágica. Todos los derechos son reservados.</p>
     </div>
   </footer>
-
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript -->
+  <script type="module" defer src="./js/main.js"></script>
 </body>
 </html>

@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-/* Colores personalizados */
 :root {
   --brown: #5e4630;
   --brown-light: #7a5c3f;
@@ -13,12 +12,12 @@
   --text-dark: #2e2e2e;
 }
 
-/* Body */
 body {
-  font-family: 'Georgia', serif;
   background-color: var(--pastel-bg);
+  font-family: 'Georgia', serif;
   color: var(--text-dark);
 }
+
 
 /* Navbar */
 .navbar {

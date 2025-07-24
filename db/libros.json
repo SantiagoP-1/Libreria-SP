@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "title": "Harry Potter y la Piedra Filosofal",
+    "image": "https://i.pinimg.com/1200x/f8/a1/7a/f8a17a0b8e2992e8de2575916cad5a62.jpg",
+    "pages": 223,
+    "author": "J.K. Rowling",
+    "year": 1997,
+    "price": 19000
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter y la Cámara Secreta",
+    "image": "https://i.pinimg.com/1200x/07/5e/ab/075eab06638dbf9b488d02bced730de0.jpg",
+    "pages": 251,
+    "author": "J.K. Rowling",
+    "year": 1998,
+    "price": 21500
+  },
+  {
+    "id": 3,
+    "title": "Harry Potter y el Prisionero de Azkaban",
+    "image": "https://i.pinimg.com/1200x/b9/a9/b7/b9a9b7834ad70086b79e941436a6a71e.jpg",
+    "pages": 317,
+    "author": "J.K. Rowling",
+    "year": 1999,
+    "price": 23900
+  },
+  {
+    "id": 4,
+    "title": "Harry Potter y el Cáliz de Fuego",
+    "image": "https://i.pinimg.com/1200x/47/61/1e/47611e7a821249249d65a7480d51f145.jpg",
+    "pages": 636,
+    "author": "J.K. Rowling",
+    "year": 2000,
+    "price": 25800
+  },
+  {
+    "id": 5,
+    "title": "Harry Potter y la Orden del Fénix",
+    "image": "https://i.pinimg.com/736x/77/20/3a/77203a4a4e3b55d2a1a2a100c27577fa.jpg",
+    "pages": 766,
+    "author": "J.K. Rowling",
+    "year": 2003,
+    "price": 29000
+  },
+  {
+    "id": 6,
+    "title": "Harry Potter y el Misterio del Príncipe",
+    "image": "https://i.pinimg.com/1200x/ec/18/ec/ec18ec38e64e27e8ee089e5b92d2460b.jpg",
+    "pages": 607,
+    "author": "J.K. Rowling",
+    "year": 2005,
+    "price": 33000
+  },
+  {
+    "id": 7,
+    "title": "Harry Potter y las Reliquias de la Muerte (Parte 1 y 2)",
+    "image": "https://images.cdn3.buscalibre.com/fit-in/360x360/cc/49/cc49a1bf8c0f2f1f1982fe6a7ca37a71.jpg",
+    "pages": 704,
+    "author": "J.K. Rowling",
+    "year": 2007,
+    "price": 40000
+  },
+  {
+    "id": 8,
+    "title": "Cocina Los Postres de Harry Potter",
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/9c/f5/9cf595d13a997ee1d78887a6ec3b5550.jpg",
+    "pages": 192,
+    "author": "Tom Grimm",
+    "year": 2022,
+    "price": 15000
+  },
+  {
+    "id": 9,
+    "title": "Libro de hechizos y pociones. Harry Potter",
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/c3/35/c3352722aacd66bbe10f7f4a31a61be4.jpg",
+    "pages": 64,
+    "author": "Stevenson",
+    "year": 2024,
+    "price": 44000
+  },
+  {
+    "id": 10,
+    "title": "Animales Fantasticos y Donde Encontrarlos",
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/b2/24/b2246c16eb390a3885e78dc992934acc.jpg",
+    "pages": 128,
+    "author": "J.K. Rowling",
+    "year": 2022,
+    "price": 25000
+  },
+  {
+    "id": 11,
+    "title": "Los Secretos de Dumbledore (Animales Fantásticos 3)",
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/f3/f2/f3f27d3f789255f0e91c024820dd8c12.jpg",
+    "pages": 288,
+    "author": "J.K. Rowling ",
+    "year": 2022,
+    "price": 65000
+  },
+  {
+    "id": 12,
+    "title": "Los cuentos de Beedle el bardo",
+    "image": "https://www.penguinlibros.com/ar/2754201-large_default/los-cuentos-de-beedle-el-bardo-un-libro-de-la-biblioteca-de-hogwarts.webp",
+    "pages": 120,
+    "author": "J.K. Rowling ",
+    "year": 2023,
+    "price": 27000
+  },
+  {
+    "id": 13,
+    "title": "Quidditch a través de los tiempos",
+    "image": "https://www.penguinlibros.com/ar/2125675-large_default/quidditch-a-traves-de-los-tiempos-un-libro-de-la-biblioteca-de-hogwarts-edicion-ilustrada-un-libro-de-la-biblioteca.webp",
+    "pages": 144,
+    "author": "J.K. Rowling ",
+    "year": 2021,
+    "price": 67000
+  },
+  {
+    "id": 14,
+    "title": "Harry Potter y la piedra filosofal (edición Gryffindor del 20º aniversario)",
+    "image": "https://www.penguinlibros.com/ar/6407247-thickbox_default/harry-potter-y-la-piedra-filosofal-edicion-gryffindor-del-20-aniversario-harry-potter-1-harry-potter-1.jpg",
+    "pages": 320,
+    "author": "J.K. Rowling ",
+    "year": 2018,
+    "price": 96000
+  },
+  {
+    "id": 15,
+    "title": "Harry Potter y la cámara secreta (edición Slytherin del 20º aniversario)",
+    "image": "https://www.penguinlibros.com/ar/3561629-large_default/harry-potter-y-la-camara-secreta-edicion-slytherin-del-20-aniversario-harry-potter-2-harry-potter-2.webp",
+    "pages": 352,
+    "author": "J.K. Rowling ",
+    "year": 2018,
+    "price": 96000
+  },
+  {
+    "id": 16,
+    "title": "Harry Potter y el prisionero de Azkaban (edición Ravenclaw del 20º aniversario)",
+    "image": "https://www.penguinlibros.com/ar/3495429-thickbox_default/harry-potter-y-el-prisionero-de-azkaban-edicion-ravenclaw-del-20-aniversario-harry-potter-3.jpg",
+    "pages": 416,
+    "author": "J.K. Rowling ",
+    "year": 2018,
+    "price": 96000
+  }
+]
