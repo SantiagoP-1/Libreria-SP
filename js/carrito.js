@@ -197,24 +197,48 @@ checkoutButton.addEventListener("click", () => {
       return { nombre, email, direccion, tarjeta };
     }
 
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const { nombre, email, direccion, tarjeta } = result.value;
+}).then((result) => {
+  if (result.isConfirmed) {
+    const { nombre, email, direccion, tarjeta } = result.value;
 
-      localStorage.setItem("datosUsuario", JSON.stringify({ nombre, email, direccion, tarjeta }));
-      accionCarrito = [];
-      localStorage.removeItem("accionCarrito");
-      renderCartShopping();
+    localStorage.setItem("datosUsuario", JSON.stringify({ nombre, email, direccion, tarjeta }));
 
-      Swal.fire(
-        '¡Compra Realizada!',
-        'Tu compra se ha procesado con éxito. ¡Gracias!',
-        'success'
-      ).then(() => {
-        window.location.href = "../index.html";
-      });
-    }
-  });
+    const totalLibros = accionCarrito.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrecio = accionCarrito.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
+
+    const resumenHTML = `
+      <div style="text-align: left;">
+        <h4>📄 Resumen de tu compra</h4>
+        <p><strong>👤 Nombre:</strong> ${nombre}</p>
+        <p><strong>📧 Email:</strong> ${email}</p>
+        <p><strong>📍 Dirección:</strong> ${direccion}</p>
+        <hr />
+        <ul style="padding-left: 1em;">
+          ${accionCarrito.map(item => `
+            <li>
+              ${item.title} — ${item.quantity} x $${item.price.toFixed(2)} = <strong>$${(item.quantity * item.price).toFixed(2)}</strong>
+            </li>
+          `).join('')}
+        </ul>
+        <p><strong>📚 Total de libros:</strong> ${totalLibros}</p>
+        <p><strong>💰 Total pagado:</strong> $${totalPrecio}</p>
+      </div>
+    `;
+    
+    accionCarrito = [];
+    localStorage.removeItem("accionCarrito");
+    renderCartShopping();
+
+    Swal.fire({
+      title: '📋 Comprobante de Compra',
+      html: resumenHTML,
+      icon: 'success',
+      confirmButtonText: 'Finalizar',
+      confirmButtonColor: '#3085d6'
+    }).then(() => {
+      window.location.href = "../index.html";
+    });
+  }
 });
-};
-
+})
+}
