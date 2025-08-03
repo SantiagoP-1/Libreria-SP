@@ -65,21 +65,21 @@ function addBookToShoppingCart(book, quantity) {
   } catch (error) {
     currentCart = [];
   }
-  const existingBookIndex = currentCart.findIndex(item => item.id === book.id);
-  if (existingBookIndex !== -1) {
-    currentCart[existingBookIndex].quantity += quantity;
-  } else {
-    currentCart.push({
-      id: book.id,
-      title: book.title,
-      image: book.image,
-      pages: book.pages,
-      author: book.author,
-      year: book.year,
-      price: book.price,
-      quantity: quantity
-    });
-  }
+const existingBook = currentCart.find(item => item.id === book.id);
+if (existingBook) {
+  existingBook.quantity += quantity;
+} else {
+  currentCart.push({
+    id: book.id,
+    title: book.title,
+    image: book.image,
+    pages: book.pages,
+    author: book.author,
+    year: book.year,
+    price: book.price,
+    quantity: quantity
+  });
+}
   localStorage.setItem("accionCarrito", JSON.stringify(currentCart));
   // Toastify
   Toastify({
@@ -90,19 +90,20 @@ function addBookToShoppingCart(book, quantity) {
     backgroundColor: "#4caf50",
   }).showToast();
 }
-document.addEventListener("DOMContentLoaded", async () => {
-  if (booksContainer) {
-    try {
-      const response = await fetch("./db/libros.json");
+if (booksContainer) {
+  fetch("./db/libros.json")
+    .then(response => {
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
-      books = await response.json();
+      return response.json();
+    })
+    .then(data => {
+      books = data;
       renderBooks(books);
-    } catch (error) {
-      if (booksContainer) {
-        booksContainer.innerHTML = `<p class="text-red-500 text-center col-span-full">No se pudieron cargar los libros.</p>`;
-      }
-    }
-  }
-});
+    })
+    .catch(error => {
+      booksContainer.innerHTML = `<p class="text-red-500 text-center col-span-full">No se pudieron cargar los libros.</p>`;
+    });
+}
+

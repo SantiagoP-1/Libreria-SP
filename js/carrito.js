@@ -59,9 +59,9 @@ function addQuantityEvent(row) {
         newQty = 1;
         e.target.value = 1;
       }
-      const index = accionCarrito.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        accionCarrito[index].quantity = newQty;
+      const libro = accionCarrito.find(item => item.id === id);
+      if (libro) {
+        libro.quantity = newQty;
         updateCartShopping();
       }
     };
@@ -103,12 +103,10 @@ function addRemoveEvent(row) {
     };
   }
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const shoppingCartBody = document.getElementById("shopping-cart-body");
-  if (shoppingCartBody) {
-    renderCartShopping();
-  }
-})
+const shoppingCartBody = document.getElementById("shopping-cart-body");
+if (shoppingCartBody) {
+  renderCartShopping();
+}
   const checkoutButton = document.getElementById("checkout-btn");
   if (checkoutButton){
 checkoutButton.addEventListener("click", () => {
